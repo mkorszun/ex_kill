@@ -1,4 +1,7 @@
 defmodule ExKill.SupervisorTerminator do
+  @moduledoc """
+  Periodically traverses regsitered supervision trees and kills the processes
+  """
   use GenServer
 
   require Logger
@@ -43,7 +46,7 @@ defmodule ExKill.SupervisorTerminator do
   end
 
   @impl GenServer
-  def handle_call({:register, new_supervisors}, _, %Config{processes: supervisors} = state) do
+  def handle_call({:register, new_supervisors}, _, state = %Config{processes: supervisors}) do
     new_state = %Config{state | processes: Enum.concat(supervisors, new_supervisors)}
     {:reply, :ok, new_state, new_state.frequency}
   end
