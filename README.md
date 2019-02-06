@@ -4,6 +4,10 @@
 
 Register your supervised processes for chaos kill.
 
+Main features:
+* ability to register whole supervision trees for chaos kill at once
+* ability to register supervisors by names, where resolution happens on kill time
+
 ## Usage
 
 ~~~bash
