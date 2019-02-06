@@ -1,0 +1,17 @@
+language: elixir
+elixir:
+  - 1.7
+
+otp_release:
+  - 21.0
+
+sudo: required
+
+before_script:
+  - make code-analysis
+
+script:
+  - make test_ci
+
+after_script:
+  - make doc

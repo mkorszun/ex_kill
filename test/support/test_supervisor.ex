@@ -1,4 +1,5 @@
 defmodule TestSupervisor do
+  @moduledoc false
   use DynamicSupervisor
 
   @child_spec %{
