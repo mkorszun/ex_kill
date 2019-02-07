@@ -9,18 +9,19 @@ defmodule TestSupervisor do
     start: {TestWorker, :start_link, []}
   }
 
-  def start(name, worker_count \\ 10) do
+  def start(name, worker_count \\ 10, custom_config \\ []) do
     Process.flag(:trap_exit, true)
 
-    with {:ok, pid} <- DynamicSupervisor.start_link(__MODULE__, :ok, name: name),
+    with {:ok, pid} <- DynamicSupervisor.start_link(__MODULE__, custom_config, name: name),
          :ok <- start_workers(pid, worker_count) do
       {:ok, pid}
     end
   end
 
   @impl DynamicSupervisor
-  def init(_) do
-    DynamicSupervisor.init(strategy: :one_for_one, max_restarts: 100, max_seconds: 5)
+  def init(custom_config) do
+    default_config = [strategy: :one_for_one, max_restarts: 100, max_seconds: 5]
+    DynamicSupervisor.init(Keyword.merge(default_config, custom_config))
   end
 
   defp start_workers(supervisor, count) do

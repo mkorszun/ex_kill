@@ -10,7 +10,7 @@ defmodule ExKill do
 
   @doc """
   Starts supervisor terminator with custom config
-  """  
+  """
   def start_link(config) do
     ExKill.SupervisorTerminator.start_link(config)
   end
