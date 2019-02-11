@@ -62,11 +62,11 @@ defmodule ExKill.SupervisorTerminator do
   end
 
   defp kill(pid, _kill? = false) do
-    Logger.info("Keeping process: #{inspect(pid)}")
+    Logger.info("Keeping process: #{inspect(Process.info(pid))}")
   end
 
   defp kill(pid, _kill? = true) do
-    Logger.info("Killing process: #{inspect(pid)}")
+    Logger.info("Killing process: #{inspect(Process.info(pid))}")
     Process.exit(pid, :kill)
   end
 
